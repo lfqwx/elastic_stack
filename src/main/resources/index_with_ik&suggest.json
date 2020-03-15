@@ -1,66 +1,51 @@
 {
   "settings": {
-    "number_of_replicas": 0
+    "number_of_replicas": 0,
+    "number_of_shards": 3
   },
   "mappings": {
-      "dynamic": false,
-      "properties": {
-        "id": {
-          "type": "text"
+    "dynamic": false,
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "name": {
+        "type": "text"
+      },
+      "gender": {
+        "type": "keyword"
+      },
+      "minzu": {
+        "type": "text"
+      },
+      "university": {
+        "type": "text"
+      },
+      "professional": {
+        "type": "text"
+      },
+      "start_year": {
+        "type": "keyword"
+      },
+      "end_year": {
+        "type": "keyword"
+      },
+      "addr": {
+        "type": "text"
+      },
+      "degree": {
+        "type": "text",
+        "fields": {
+          "keyword":{
+            "type":"keyword",
+            "ignore_above":256
+          }
         },
-        "name": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "gender": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "minzu": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "university": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "professional": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "start_year": {
-          "type": "text"
-        },
-        "end_year": {
-          "type": "text"
-        },
-        "addr": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "degree": {
-          "type": "text",
-          "index": true,
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        },
-        "suggest":{
-          "type":"completion",
-          "analyzer": "ik_smart",
-          "search_analyzer": "ik_smart"
-        }
+        "fielddata": true
+      },
+      "suggest":{
+        "type":"completion"
       }
+    }
   }
 }
