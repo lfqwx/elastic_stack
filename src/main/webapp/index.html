@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>𝓛.𝓕.𝓠-𝓔𝓢-Data</title>
+    <link rel="icon" href="img/bi.ico" type="image/x-icon"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui-v2.5.5/css/layui.css">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="layui-v2.5.5/css/autocomplete.css">
+    <script src="layui-v2.5.5/layui.js"></script>
+    <script src="layui-v2.5.5/lay/modules/autocomplete.js"></script>
+</head>
+<body>
+<div class="layuimini-container">
+    <fieldset class="layui-elem-field layui-field-title" style="margin: 10px 10px 10px 10px;border-width: 1px;border-style: solid">
+        <legend style="font-size:16px;font-weight:bold;color: red">Elasticsearch-学生信息搜索</legend>
+        <div style="margin: 10px 10px 10px 10px;">
+            <form class="layui-form layui-form-pane" filter="search-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <div style="width: 420px;">
+                            <input type="text" name="keyword" id="keyword" autocomplete="off"
+                                   placeholder="关键词&nbsp;&nbsp;&nbsp;如姓名、学校、专业。。。"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <a class="layui-btn " lay-submit="" lay-filter="data-search-btn">&nbsp;&nbsp;搜&nbsp;&nbsp;索&nbsp;&nbsp;</a>
+                    </div>
+                    <div class="layui-inline">
+                        <button type="reset" class="layui-btn layui-btn-danger">&nbsp;&nbsp;重&nbsp;&nbsp;置&nbsp;&nbsp;</button>
+                    </div>
+                    <div class="layui-inline">
+                        <a href="./page/school.html" target="_blank" class="layui-btn layui-btn-warm">学校地图</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </fieldset>
+
+
+    <div class="layuimini-main">
+        <table class="layui-hide" id="currentTableId"
+               lay-filter="student"></table>
+    </div>
+</div>
+
+<script>
+    //搜索框自动提示
+    layui.config({
+        base: 'layui-v2.5.5/lay/modules/' //假设这是autocomplete.js所在的目录
+    }).extend({ //设定模块别名
+        autocomplete: 'autocomplete'
+    });
+    layui.use(['form', 'table', 'laydate', 'layer','autocomplete'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            laydate = layui.laydate,
+            layer = layui.layer;
+        //自动补全接口
+        layui.autocomplete({
+            element: '#keyword',
+            url: '/autocomplete'
+        });
+        //初始化数据表
+        table.render({
+            title: '学生信息',
+            elem: '#currentTableId',
+            url: '/all',
+            page: true,
+            // cellMinWidth: 80,
+            title: '学生信息',
+            cols: [[
+                {
+                    field: 'id',
+                    title: '编号',
+                    sort: true,
+                    align: 'center',
+                    style: 'color:blue;text-decoration:underline;cursor: pointer;',
+                    templet: function (res) {
+                        return '<a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-' + res.LAY_INDEX + '" data-iframe-tab="" data-title="' + res.name + '" data-icon="fa fa-linkedin-square" target="_self">' + res.id + '</a>'
+                    }
+                },
+                {field: 'name', align: 'center', title: '姓名', edit: 'text'},
+                {field: 'gender', align: 'center', title: '性别', cellMinWidth: 10, edit: 'text'},
+                {field: 'minzu', align: 'center', title: '民族', edit: 'text'},
+                {field: 'university', align: 'center', title: '学校', edit: 'text', sort: true},
+                {field: 'professional', align: 'center', title: '专业', edit: 'text', sort: true},
+                {field: 'degree', align: 'center', title: '年级', edit: 'text', sort: true},
+                {field: 'addr', align: 'center', title: '家庭住址', edit: 'text', sort: true}
+            ]]
+        });
+        // 监听表单搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            //layer.alert(typeof data.field.start); //string
+            //执行搜索重载
+            table.reload('currentTableId', {
+                url: '/find'
+                , method: 'get'
+                , page: true
+                , limit: 10
+                , where: data.field
+            });
+            return false;
+        });
+
+        //监听单元格编辑
+        table.on('edit(student)', function (obj) {
+            var value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
+
+            $.post('/update', {id: data.id, field: field, value: value}, function () {
+                layer.alert('ID: ' + data.id + ',' + field + '字段更改为：' + value, {
+                    skin: 'layui-layer-molv' //样式类名
+                    , closeBtn: 0
+                });
+            });
+
+        });
+        laydate.render({
+            elem: '#start'
+            , type: 'datetime'
+        });
+        laydate.render({
+            elem: '#end'
+            , type: 'datetime'
+        });
+
+    });
+
+
+
+</script>
+</body>
+</html>

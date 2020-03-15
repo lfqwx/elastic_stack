@@ -1,0 +1,15 @@
+spring:
+  datasource:
+     primary:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/elastic?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: root
+  devtools:
+     restart:
+        enabled: true
+        additional-exclude: src/main/java
+  mvc:
+    view:
+      prefix: /
+      suffix: .html

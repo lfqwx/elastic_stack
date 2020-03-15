@@ -1,0 +1,66 @@
+{
+  "settings": {
+    "number_of_replicas": 0
+  },
+  "mappings": {
+      "dynamic": false,
+      "properties": {
+        "id": {
+          "type": "text"
+        },
+        "name": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "gender": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "minzu": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "university": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "professional": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "start_year": {
+          "type": "text"
+        },
+        "end_year": {
+          "type": "text"
+        },
+        "addr": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "degree": {
+          "type": "text",
+          "index": true,
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "suggest":{
+          "type":"completion",
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        }
+      }
+  }
+}
