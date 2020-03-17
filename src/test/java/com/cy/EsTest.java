@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: 𝓛.𝓕.𝓠
@@ -30,7 +31,9 @@ public class EsTest extends ApplicationTests {
     @Test
     public void aggSchool() throws IOException {
         //aggSchool.initial();
-        aggSchool.more("1");
+        Map map = aggSchool.more("1");
+        System.out.println(map.get("school").toString());
+        System.out.println(map.get("numNv").toString());
     }
 
 

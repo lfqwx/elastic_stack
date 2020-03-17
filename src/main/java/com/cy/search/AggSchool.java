@@ -117,7 +117,7 @@ public class AggSchool {
         sourceBuilder.from(0);//索引位置
         sourceBuilder.size(mapper.count());//返回数目
         TermsAggregationBuilder university = AggregationBuilders
-                .terms("university").field("university.keyword").size(20);
+                .terms("university").field("university.keyword").size(50);
         TermsAggregationBuilder nv = AggregationBuilders
                 .terms("nv").field("gender").size(2);
         CardinalityAggregationBuilder zy = AggregationBuilders
@@ -127,16 +127,15 @@ public class AggSchool {
 
         university.subAggregation(nv).subAggregation(zy).subAggregation(degree);//添加子聚合
         sourceBuilder.aggregation(university);
-        System.out.println("MoreGirl-sourceBuilder:" + sourceBuilder);
+        System.out.println("More-sourceBuilder:" + sourceBuilder);
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.source(sourceBuilder);
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
         Aggregations aggregations = response.getAggregations();
         List<Aggregation> asList = aggregations.asList();
-        System.out.println("MoreGirl聚合分析的个数：" + asList.size());
+        System.out.println("More聚合分析的个数：" + asList.size());
         //返回参数
         Aggregation agg = asList.get(0);//因为university的聚合类型为terms，所以不用判断类型了
-        Map map = new HashMap();
         List list = new ArrayList();
         for (Terms.Bucket bucket : ((Terms) agg).getBuckets()) {
             long rs = bucket.getDocCount();//该校学生总人数
@@ -145,6 +144,8 @@ public class AggSchool {
             long numZy = 0;
             long numNv = 0;
             long numBy = 0;
+            Map map = new HashMap();
+            //子聚合
             for (Aggregation aggregation : aggs.asList()) {
                 String type = aggregation.getType();
                 if (type.equals(CardinalityAggregationBuilder.NAME)) {
@@ -169,18 +170,54 @@ public class AggSchool {
             map.put("rs", rs);
             list.add(map);
         }
+        int indexNv = 0;
+        long tempNv = 0;
         for (int i = 0; i < list.size(); i++) {
-            Map m = (Map) (list.get(i));
-            m.get("numNv");
+            Map m = (Map) list.get(i);
+            long num = (Long) m.get("numNv");
+            if (tempNv < num) {
+                indexNv = i;
+                tempNv = num;
+            }
         }
+        Map mapNv = (Map) list.get(indexNv);//女生最多
 
+        int indexBy = 0;
+        long tempBy = 0;
+        for (int i = 0; i < list.size(); i++) {
+            Map m = (Map) list.get(i);
+            long num = (Long) m.get("numBy");
+            if (tempBy < num) {
+                indexBy = i;
+                tempBy = num;
+            }
+        }
+        Map mapBy = (Map) list.get(indexBy);//毕业生最多
+
+        int indexZy= 0;
+        long tempZy = 0;
+        for (int i = 0; i < list.size(); i++) {
+            Map m = (Map) list.get(i);
+            long num = (Long) m.get("numZy");
+            if (tempZy < num) {
+                indexZy = i;
+                tempZy = num;
+            }
+        }
+        Map mapZy = (Map) list.get(indexZy);//毕业生最多
         //判断index，决定返回内容
-        switch (index){
+        switch (index) {
             case "1":
-
+                System.out.println("女生多");
+                return mapNv;
+            case "2":
+                System.out.println("毕业生多");
+                return mapBy;
+            case "3":
+                System.out.println("专业多");
+                return mapZy;
         }
         return null;
-
     }
 
 

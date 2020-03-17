@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="layui-v2.5.5/css/layui.css">
     <link rel="stylesheet" href="layui-v2.5.5/css/autocomplete.css">
     <link rel="stylesheet" href="css/school.css">
-    <!-- <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=SmAe0vgfDmA9m7dfGvo811yvSE8OwG3G"></script>
-     <script type="text/javascript" src="//api.map.baidu.com/library/RectangleZoom/1.2/src/RectangleZoom_min.js"></script>-->
+     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=SmAe0vgfDmA9m7dfGvo811yvSE8OwG3G"></script>
+     <script type="text/javascript" src="//api.map.baidu.com/library/RectangleZoom/1.2/src/RectangleZoom_min.js"></script>
     <script src="layui-v2.5.5/layui.js"></script>
     <script src="layui-v2.5.5/lay/modules/autocomplete.js"></script>
     <script src="js/school.js"></script>
@@ -71,18 +71,17 @@
         </div>
     </div>
 </div>
-<!--<div id="map"></div>-->
+<div id="map"></div>
 </body>
 </html>
 <script type="text/javascript">
-    // 百度地图API功能
-    // var map = new BMap.Map("map");  // 创建Map实例
-    // map.centerAndZoom("中国地质大学(武汉)",14);      // 初始化地图,用城市名设置地图中心点
-    // map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
-    // map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
-    // var myDrag = new BMapLib.RectangleZoom(map, {
-    //     followText: "拉框操作"
-    // });
-    // myDrag.setCursor("crosshair");
-    // myDrag.open();  //开启拉框放大
+    var map = new BMap.Map("map");  // 创建Map实例
+    map.centerAndZoom("中国地质大学(武汉)",14);      // 初始化地图,用城市名设置地图中心点
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+    var myDrag = new BMapLib.RectangleZoom(map, {
+        followText: "拉框操作"
+    });
+    myDrag.setCursor("crosshair");
+    myDrag.open();  //开启拉框放大
 </script>
