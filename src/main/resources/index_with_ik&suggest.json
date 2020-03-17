@@ -19,10 +19,24 @@
         "type": "text"
       },
       "university": {
-        "type": "text"
+        "type": "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "fielddata" : true
       },
       "professional": {
-        "type": "text"
+        "type": "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "fielddata" : true
       },
       "start_year": {
         "type": "keyword"

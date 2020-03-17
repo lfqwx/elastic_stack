@@ -13,7 +13,9 @@ import java.util.List;
  * @author: 𝓛.𝓕.𝓠
  */
 public interface StudentMapper extends BaseMapper<Student> {
-    //插入一条
+    //计算数据总数
+    @Select("select count(id) from stu_info")
+    int count();
 
     @Override
     int insert(Student stu);

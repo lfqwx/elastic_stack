@@ -46,6 +46,7 @@ public class EsSearch {
     @Autowired
     private StudentMapper mapper;
 
+
     /**
      * 文档操作
      */

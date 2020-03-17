@@ -2,17 +2,17 @@
 <html>
 <head>
     <title>𝓛.𝓕.𝓠-𝓔𝓢-SchoolMap</title>
-    <link rel="icon" href="../img/bi.ico" type="image/x-icon"/>
+    <link rel="icon" href="img/bi.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" href="../layui-v2.5.5/css/layui.css">
-    <link rel="stylesheet" href="../layui-v2.5.5/css/autocomplete.css">
-    <link rel="stylesheet" href="../css/school.css">
+    <link rel="stylesheet" href="layui-v2.5.5/css/layui.css">
+    <link rel="stylesheet" href="layui-v2.5.5/css/autocomplete.css">
+    <link rel="stylesheet" href="css/school.css">
     <!-- <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=SmAe0vgfDmA9m7dfGvo811yvSE8OwG3G"></script>
      <script type="text/javascript" src="//api.map.baidu.com/library/RectangleZoom/1.2/src/RectangleZoom_min.js"></script>-->
-    <script src="../layui-v2.5.5/layui.js"></script>
-    <script src="../layui-v2.5.5/lay/modules/autocomplete.js"></script>
-    <script src="../js/school.js"></script>
+    <script src="layui-v2.5.5/layui.js"></script>
+    <script src="layui-v2.5.5/lay/modules/autocomplete.js"></script>
+    <script src="js/school.js"></script>
     <style type="text/css">
         body, html {
             width: 100%;
@@ -40,16 +40,19 @@
 <div id="es">
     <div class="layui-tab" lay-filter="test" style="margin-top: 0px;">
         <ul class="layui-tab-title">
-            <li class="layui-this" lay-id="11">默认</li>
-            <li lay-id="22">女生多</li>
-            <li lay-id="33">专业多</li>
-            <li lay-id="44">毕业生多</li>
+            <li class="layui-this" lay-id="0">默认</li>
+            <li lay-id="1">女生多</li>
+            <li lay-id="2">毕业生多</li>
+            <li lay-id="3">专业多</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <img src="../img/logo.png" alt="学校名称">
+                <img src="img/logo.png" alt="学校名称">
                 <span id="xx_mc"></span>
-                <span id="data"></span>
+                <span class="value" id="rs"></span>
+                <span class="value" id="nv"></span>
+                <span class="value" id="by"></span>
+                <span class="value" id="zy"></span>
             </div>
         </div>
         <div id="search">

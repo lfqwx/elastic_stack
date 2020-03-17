@@ -45,7 +45,7 @@ public class TestController {
     @ResponseBody
     public ApiResponse find(@RequestParam(value = "keyword") String keyword, @RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) throws IOException {
         List list = esSearch.query(keyword, (page - 1) * limit, limit);
-        List list2 = esSearch.query(keyword, 0, 222);
+        List list2 = esSearch.query(keyword, 0, mapper.count());
         return ApiResponse.of(0, "", list2.size(), list);
     }
     //自动补全输入框

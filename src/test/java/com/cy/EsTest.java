@@ -2,6 +2,7 @@ package com.cy;
 
 import com.cy.entity.Student;
 import com.cy.mapper.StudentMapper;
+import com.cy.search.AggSchool;
 import com.cy.search.EsSearch;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.Test;
@@ -14,15 +15,29 @@ import java.util.List;
  * @author: 𝓛.𝓕.𝓠
  */
 public class EsTest extends ApplicationTests {
-    /**
-     * 业务测试
-     */
     @Autowired
     private EsSearch esSearch;
     @Autowired
     private StudentMapper mapper;
     @Autowired
     private RestHighLevelClient client;
+    @Autowired
+    private AggSchool aggSchool;
+
+    /**
+     * 聚合分析
+     */
+    @Test
+    public void aggSchool() throws IOException {
+        //aggSchool.initial();
+        aggSchool.more("1");
+    }
+
+
+    /**
+     * 业务测试
+     */
+
 
     /**
      * 文档相关操作
