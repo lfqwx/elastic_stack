@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="layui-v2.5.5/css/layui.css">
     <link rel="stylesheet" href="layui-v2.5.5/css/autocomplete.css">
     <link rel="stylesheet" href="css/school.css">
-     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=SmAe0vgfDmA9m7dfGvo811yvSE8OwG3G"></script>
-     <script type="text/javascript" src="//api.map.baidu.com/library/RectangleZoom/1.2/src/RectangleZoom_min.js"></script>
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=SmAe0vgfDmA9m7dfGvo811yvSE8OwG3G"></script>
+    <script type="text/javascript"
+            src="//api.map.baidu.com/library/RectangleZoom/1.2/src/RectangleZoom_min.js"></script>
     <script src="layui-v2.5.5/layui.js"></script>
     <script src="layui-v2.5.5/lay/modules/autocomplete.js"></script>
     <script src="js/school.js"></script>
@@ -63,7 +64,7 @@
                 <div class="layui-form-item" style="margin-left: -50px;margin-top: 10px;">
                     <label class="layui-form-label">开&nbsp;&nbsp;关</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                        <input type="checkbox" lay-filter="switchTest" name="close" lay-skin="switch" lay-text="ON|OFF">
                     </div>
                 </div>
             </form>
@@ -75,13 +76,5 @@
 </body>
 </html>
 <script type="text/javascript">
-    var map = new BMap.Map("map");  // 创建Map实例
-    map.centerAndZoom("中国地质大学(武汉)",14);      // 初始化地图,用城市名设置地图中心点
-    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
-    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
-    var myDrag = new BMapLib.RectangleZoom(map, {
-        followText: "拉框操作"
-    });
-    myDrag.setCursor("crosshair");
-    myDrag.open();  //开启拉框放大
+
 </script>

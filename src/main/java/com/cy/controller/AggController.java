@@ -29,4 +29,11 @@ public class AggController {
         Map map = aggSchool.aggSchool(index);
         return ApiResponse.of(0,"",0,map);
     }
+
+    //获取区域信息
+    @GetMapping("/region")
+    @ResponseBody
+    public ApiResponse getRegionInfo(){
+        return null;
+    }
 }

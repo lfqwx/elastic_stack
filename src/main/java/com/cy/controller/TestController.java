@@ -2,6 +2,7 @@ package com.cy.controller;
 
 import com.cy.base.ApiResponse;
 import com.cy.entity.Student;
+import com.cy.mapper.LonLatMapper;
 import com.cy.mapper.StudentMapper;
 import com.cy.search.EsSearch;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class TestController {
     private StudentMapper mapper;
     @Autowired
     private EsSearch esSearch;
+    @Autowired
+    private LonLatMapper lonLatMapper;
 
     @GetMapping("/hello")
     @ResponseBody
@@ -31,7 +34,15 @@ public class TestController {
         return "hello,cy!";
     }
 
-    //查询全部信息
+    //查询全部学校经纬度信息
+    @GetMapping("/lon_lat")
+    @ResponseBody
+    public ApiResponse getLonLat(){
+        List list = lonLatMapper.findAll();
+        return ApiResponse.of(0,"",list.size(),list);
+    }
+
+    //查询全部学生信息
     @GetMapping("/all")
     @ResponseBody
     public ApiResponse all(@RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) {
